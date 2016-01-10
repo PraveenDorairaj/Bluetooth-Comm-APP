@@ -8,20 +8,46 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.example.test.MainActivity" >
 
-    <Button
-        android:id="@+id/button2"
+    <TextView
+        android:id="@+id/textView1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/button3"
+        android:layout_alignLeft="@+id/button4"
+        android:layout_alignParentTop="true"
+        android:text="Robot Controller" />
+
+    <TextView
+        android:id="@+id/blutoothButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textView1"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="32dp"
-        android:text="Forward" />
+        android:layout_marginTop="14dp"
+        android:text="Bluetooth Connect" />
+
+    <ImageView
+        android:id="@+id/BluetoothPicture"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/blutoothButton"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="23dp"
+        android:src="@drawable/ic_launcher" />
+
+    <Button
+        android:id="@+id/Connect"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/blutoothButton"
+        android:layout_centerHorizontal="true"
+        android:text="Connect" />
 
     <Button
         android:id="@+id/button1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerVertical="true"
+        android:layout_below="@+id/Connect"
+        android:layout_marginTop="147dp"
         android:layout_toLeftOf="@+id/button2"
         android:text="Left" />
 
@@ -31,7 +57,7 @@
         android:layout_height="wrap_content"
         android:layout_alignBaseline="@+id/button1"
         android:layout_alignBottom="@+id/button1"
-        android:layout_toRightOf="@+id/button2"
+        android:layout_toRightOf="@+id/textView1"
         android:text="Right" />
 
     <Button
@@ -40,16 +66,22 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/button1"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="32dp"
         android:text="Backward" />
 
-    <TextView
-        android:id="@+id/textView1"
+    <Button
+        android:id="@+id/Disconnect"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="32dp"
-        android:text="Robot Controller" />
+        android:layout_alignLeft="@+id/textView1"
+        android:layout_below="@+id/Connect"
+        android:text="Disconnect" />
+
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/Disconnect"
+        android:layout_centerVertical="true"
+        android:text="Forward" />
 
 </RelativeLayout>
