@@ -28,6 +28,42 @@ public class MainActivity extends Activity {
 	public Button left;
 	public Button right;
 	
+	// Creating Bluetooth broad cast receiver 
+	BroadcastReceiver bluetoothState= new BroadcastReceiver(){
+	@Override
+	public void onReceive(Context context, Intent intent){
+		String prevStateExtra = BluetoothAdapter.EXTRA_PREVIOUS_STATE;
+		String stateExtra = BluetoothAdapter.EXTRA_STATE;
+		int state = intent.getIntExtra(stateExtra, -1);
+		int previousState = intent.getIntExtra(prevStateExtra,-1);
+		String toastText = "";
+		
+		switch(state){
+			case(BluetoothAdapter.STATE_TURNING_ON):{
+				toastText = "Bluetooth turning on...";
+				Toast.makeText(MainActivity.this,  toastText,Toast.LENGTH_SHORT).show();
+				break;
+			}
+			case (BluetoothAdapter.STATE_ON):{
+				toastText = "Bluetooth On";
+				Toast.makeText(MainActivity.this, toastText, Toast.LENGTH_SHORT).show();
+				setupUI();
+				break;
+			}
+			case(BluetoothAdapter.STATE_TURNING_OFF):{
+				toastText = "Bluetooth turing off...";
+				Toast.makeText(MainActivity.this, toastText, Toast.LENGTH_SHORT).show();
+				break;
+			}
+			case(BluetoothAdapter.STATE_OFF):{
+				toastText = "Bluetooth Off";
+				Toast.makeText(MainActivity.this, toastText, Toast.LENGTH_SHORT).show();
+				setupUI();
+				break;
+			}
+		}
+	}
+	};
 
 	
 	
@@ -50,7 +86,6 @@ public class MainActivity extends Activity {
 		final ImageView bluetoothPic = (ImageView)findViewById(R.id.BluetoothPicture);
 
 //-----------------------------------------		
-		connect.setVisibility(View.GONE);
 		disconnect.setVisibility(View.GONE);
 		bluetoothPic.setVisibility(View.GONE);
 //----------------------------------------
@@ -61,6 +96,9 @@ public class MainActivity extends Activity {
 			String name = btAdapter.getName();
 			String statusText = name + " : " + address;
 			status.setText(statusText);
+			connect.setVisibility(View.GONE);
+			disconnect.setVisibility(View.VISIBLE);
+			bluetoothPic.setVisibility(View.VISIBLE);
 		} else {
 			connect.setVisibility(View.VISIBLE);
 			status.setText("Bluetooth is not on");
@@ -72,6 +110,7 @@ public class MainActivity extends Activity {
 				String actionStateChanged = BluetoothAdapter.ACTION_STATE_CHANGED;
 				String actionRequestEnable = BluetoothAdapter.ACTION_REQUEST_ENABLE;
 				IntentFilter filter = new IntentFilter (actionStateChanged);
+				registerReceiver(bluetoothState,filter);
 				startActivityForResult(new Intent(actionRequestEnable),0);
 			}	
 		});
@@ -80,6 +119,13 @@ public class MainActivity extends Activity {
 		disconnect.setOnClickListener(new OnClickListener(){
 			@Override
 			public void onClick(View v) {				
+				btAdapter.disable();
+				connect.setVisibility(View.VISIBLE);
+				disconnect.setVisibility(View.GONE);
+				bluetoothPic.setVisibility(View.GONE);
+				status.setText("BlueTooth Off");
+				
+						
 			}	
 		});
 //-----------------------------------------
