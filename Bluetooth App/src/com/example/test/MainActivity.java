@@ -1,11 +1,15 @@
 package com.example.bluetoooth_controller;
 
+import java.util.Set;
+
 import android.app.Activity;
 import android.bluetooth.BluetoothAdapter;
+import android.bluetooth.BluetoothDevice;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -120,7 +124,7 @@ public class MainActivity extends Activity {
 				String scanModeChanged = BluetoothAdapter.ACTION_SCAN_MODE_CHANGED;
 				String beDiscoverable = BluetoothAdapter.ACTION_REQUEST_DISCOVERABLE;
 				IntentFilter filter = new IntentFilter(scanModeChanged);
-				registerReceiver(bluetoothSate, filter);
+				registerReceiver(bluetoothState, filter);
 				startActivityForResult(new Intent(beDiscoverable),DISCOVERY_REQUEST);
 				
 				
@@ -190,23 +194,23 @@ public class MainActivity extends Activity {
 			Toast.makeText(MainActivity.this, toastText, Toast.LENGTH_SHORT).show();
 			
 			//see if this device is in a list of current visible, paired devices
-			Set<BluetoothDevice> pairedDevices = btAdapter.getondedDevices();
-			for(BluetoothDevice pairedDevice : pairedDevice){
-				if(pairedDevice.getAdress().equals(lastUsedRemoteDevice)){
-					toastText = "Found device: " + pairedDevice.getNAme() + "a" + lastUsedRemoteDevice;
+			Set<BluetoothDevice> pairedDevices = btAdapter.getBondedDevices();
+			for(BluetoothDevice pairedDevice : pairedDevices){
+				if(pairedDevice.getAddress().equals(lastUsedRemoteDevice)){
+					toastText = "Found device: " + pairedDevice.getName() + "a" + lastUsedRemoteDevice;
 					Toast.makeText(MainActivity.this , toastText, Toast.LENGTH_SHORT).show();
 					remoteDevice = pairedDevice;
 				}
 			}
 		}//end if
 		
-		if(remoteDeivce === null){
+		if(remoteDevice == null){
 			toastText = "Start discovery for remote devices...";
-			Toast.makeText(MainActiviy.this, toastText, Toast.LENGTH_SHORT).show();
+			Toast.makeText(MainActivity.this, toastText, Toast.LENGTH_SHORT).show();
 			//start discovery
 			if(btAdapter.startDiscovery()){
 				toastText = "Discovery thread started...Scanning for Devices";
-				Toast.makeText(MainActiviy.this, toastText, Toast.LENGTH_SHORT).show();
+				Toast.makeText(MainActivity.this, toastText, Toast.LENGTH_SHORT).show();
 				registerReceiver(discoveryResult, new IntentFilter(BluetoothDevice.ACTION_FOUND));
 			}
 		}
@@ -216,11 +220,12 @@ public class MainActivity extends Activity {
 	BroadcastReceiver discoveryResult = new BroadcastReceiver(){
 		@Override
 		public void onReceive(Context context, Intent intent){
-			String remoteDeviceName - intent.getStringExtra(BluetoothDevice.EXTRA_NAME);
+			String remoteDeviceName = intent.getStringExtra(BluetoothDevice.EXTRA_NAME);
 			BluetoothDevice remoteDevice;
 			remoteDevice = intent.getParselableExtra(BluetoothDevice.EXTRA_DEVICE);
 			toastText = "Discovered: " + remoteDeviceName;
 			Toast.makeText(MainActiviy.this, toastText, Toast.LENGTH_SHORT).show();
+			//statusUpdate.setText(statusText);
 		}
 				
 	}
@@ -228,7 +233,7 @@ public class MainActivity extends Activity {
 	
 	private String getLastUsedRemoteBTDevice(){
 		SharedPreferences prefs = getPreferences(MODE_PRIVATE);
-		String result = profs.getString("Last_REMOTE_DEVICE_ADDRESS",null);
+		String result = prefs.getString("Last_REMOTE_DEVICE_ADDRESS",null);
 		return result;
 	}
 	
