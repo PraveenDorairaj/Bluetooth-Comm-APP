@@ -12,7 +12,6 @@
         android:id="@+id/textView1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/button4"
         android:layout_alignParentTop="true"
         android:text="Robot Controller" />
 
@@ -20,7 +19,6 @@
         android:id="@+id/blutoothButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/textView1"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="14dp"
         android:text="Bluetooth Connect" />
@@ -29,7 +27,6 @@
         android:id="@+id/BluetoothPicture"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/blutoothButton"
         android:layout_alignParentRight="true"
         android:layout_marginRight="23dp"
         android:src="@drawable/ic_launcher" />
@@ -38,17 +35,12 @@
         android:id="@+id/Connect"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/blutoothButton"
-        android:layout_alignRight="@+id/Disconnect"
-        android:layout_below="@+id/blutoothButton"
         android:text="Connect" />
 
     <Button
-        android:id="@+id/button4"
+        android:id="@+id/backwards"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignRight="@+id/button2"
-        android:layout_below="@+id/button1"
         android:layout_marginTop="16dp"
         android:text="Backward" />
 
@@ -56,33 +48,26 @@
         android:id="@+id/Disconnect"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/blutoothButton"
-        android:layout_below="@+id/Connect"
         android:text="Disconnect" />
 
     <Button
-        android:id="@+id/button3"
+        android:id="@+id/right"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/button4"
-        android:layout_toRightOf="@+id/blutoothButton"
         android:text="Right" />
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/forward"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignRight="@+id/blutoothButton"
         android:layout_centerVertical="true"
         android:text="Forward" />
 
     <Button
-        android:id="@+id/button1"
+        android:id="@+id/left"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/button2"
         android:layout_marginTop="16dp"
-        android:layout_toLeftOf="@+id/button2"
         android:text="Left" />
 
 </RelativeLayout>

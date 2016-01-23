@@ -1,4 +1,4 @@
-package com.example.test;
+package com.example.bluetoooth_controller;
 
 import android.app.Activity;
 import android.bluetooth.BluetoothAdapter;
@@ -76,14 +76,14 @@ public class MainActivity extends Activity {
 	
 	private void setupUI(){
 		
-		//forward = (Button) findViewById (R.id.button4);//button4 not working for some reason
-		backward =  (Button) findViewById (R.id.button1);
-		left = (Button) findViewById (R.id.button3);
-		right = (Button) findViewById (R.id.button2);
-		final TextView status = (TextView)findViewById(R.id.blutoothButton);
-		final Button connect = (Button)findViewById(R.id.Connect);
-		final Button disconnect = (Button)findViewById(R.id.Disconnect);
-		final ImageView bluetoothPic = (ImageView)findViewById(R.id.BluetoothPicture);
+		forward = (Button) findViewById (R.id.button1);//button4 not working for some reason
+		backward =  (Button) findViewById (R.id.button4);
+		left = (Button) findViewById (R.id.button2);
+		right = (Button) findViewById (R.id.button3);
+		final TextView status = (TextView)findViewById(R.id.textview);
+		final Button connect = (Button)findViewById(R.id.button6);
+		final Button disconnect = (Button)findViewById(R.id.button5);
+		final ImageView bluetoothPic = (ImageView)findViewById(R.id.imageView1);
 
 //-----------------------------------------		
 		disconnect.setVisibility(View.GONE);
@@ -129,13 +129,13 @@ public class MainActivity extends Activity {
 			}	
 		});
 //-----------------------------------------
-		/*forward.setOnClickListener(new OnClickListener(){
+		forward.setOnClickListener(new OnClickListener(){
 
 			@Override
 			public void onClick(View v) {				
 				Toast.makeText(getApplicationContext(), "Robot is going forward", Toast.LENGTH_LONG).show();// TODO Auto-generated method stub			
 			}
-		});*/
+		});
 //--------------------------------------		
 		backward.setOnClickListener(new OnClickListener(){
 			@Override
